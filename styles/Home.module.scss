@@ -1,0 +1,34 @@
+.home__svg {
+  // Override SVG font
+  font-family: "Courier New", monospace !important;
+}
+
+// Options table
+.home__options {
+  background-color: rgb(25, 27, 31);
+  max-width: 500px;
+  width: calc(100% - 52px);
+  box-shadow: rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px,
+    rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px;
+  border-radius: 24px;
+  margin: 50px auto;
+  border: 1px solid rgb(77, 83, 95);
+  text-align: left;
+  padding: 10px 25px;
+  color: white;
+
+  h3:first-of-type {
+    margin-block-start: 15px;
+  }
+
+  h3 {
+    margin-block-start: 30px;
+    margin-block-end: 0px;
+  }
+
+  p {
+    margin-block-start: 5px;
+    margin-block-end: 15px;
+    color: rgb(161, 169, 184);
+  }
+}

@@ -1,4 +1,39 @@
+// Header styles
 .layout__header {
 	text-align: center;
-	color: #fff;
+	color: white;
+	padding: 30px 20px;
+
+	img {
+		width: 40px;
+	}
+
+	h1 {
+		margin: 10px 0px;
+	}
+
+	p {
+		max-width: 500px;
+		margin: 0px auto;
+		line-height: 25px;
+
+		a {
+			color: rgb(96, 158, 245);
+		}
+
+		a:hover {
+			opacity: 0.8;
+		}
+	}
+}
+
+// Content w/ padding
+.layout__content {
+	text-align: center;
+	padding: 0px 20px;
+	background: radial-gradient(
+		50% 50% at 50% 50%,
+		rgba(252, 7, 125, 0.063) 0%,
+		rgba(255, 255, 255, 0) 100%
+	);
 }

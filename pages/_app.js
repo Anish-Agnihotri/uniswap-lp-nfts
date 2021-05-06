@@ -1,7 +1,6 @@
-import "../styles/globals.scss";
+import "../styles/globals.scss"; // Global styles
 
-function MyApp({ Component, pageProps }) {
+// Export application
+export default function LPArtGenerator({ Component, pageProps }) {
 	return <Component {...pageProps} />;
 }
-
-export default MyApp;

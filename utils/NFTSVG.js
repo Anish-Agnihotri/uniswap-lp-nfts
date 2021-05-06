@@ -316,7 +316,7 @@ function generateSVGPositionDataAndLocationCurve(
 		).toString()}px" height="26px" rx="8px" ry="8px" fill="rgba(0,0,0,0.6)" />
     <text x="12px" y="17px" font-family="Courier New', monospace" font-size="12px" fill="white">
       <tspan fill="rgba(255,255,255,0.6)">ID: </tspan>
-      ${tokenId},
+      ${tokenId}
     </text>
   </g>
   <g style="transform:translate(29px, 414px)">
