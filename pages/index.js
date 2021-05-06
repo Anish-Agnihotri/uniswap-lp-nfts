@@ -4,6 +4,25 @@ import generateSVG from "utils/NFTSVG"; // SVG rendering utils
 import { HuePicker } from "react-color"; // Color picker
 import styles from "styles/Home.module.scss"; // Page styles
 
+// Constant: token name and address mapping
+const TOKENS = [
+  { name: "DAI", address: "0x6b175474e89094c44da98b954eedeac495271d0f" },
+  { name: "USDC", address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48" },
+  { name: "WETH", address: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" },
+  { name: "AAVE", address: "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9" },
+  { name: "BADGER", address: "0x3472a5a71965499acd81997a54bba8d852c6e53d" },
+  { name: "COMP", address: "0xc00e94cb662c3520282e6f5717214004a7f26888" },
+  { name: "CRV", address: "0xd533a949740bb3306d119cc777fa900ba034cd52" },
+  { name: "MKR", address: "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2" },
+  { name: "POOL", address: "0x0cec1a9154ff802e7934fc916ed7ca50bde6844e" },
+  { name: "REN", address: "0x408e41876cccdc0f92210600ef50372656052a38" },
+  { name: "SOCKS", address: "0x23b608675a2b2fb1890d3abbd85c5775c51691d5" },
+  { name: "SUSHI", address: "0x6b3595068778dd592e39a122f4f5a5cf09c90fe2" },
+  { name: "TORN", address: "0x77777feddddffc19ff86db637967013e6c6a116c" },
+  { name: "UMA", address: "0x04fa0d235c4abf4bcf4787af4cf447de572ef828" },
+  { name: "UNI", address: "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984" },
+];
+
 export default function Home() {
   // State management (should refactor to object)
   const [x1, setX1] = useState(192);
@@ -19,7 +38,7 @@ export default function Home() {
   const [color1, setColor1] = useState("abcdea");
   const [color2, setColor2] = useState("678901");
   const [color3, setColor3] = useState("fabcdf");
-  const [tickUpper, setTickUpper] = useState(2000);
+  const [tickUpper, setTickUpper] = useState(3000);
   const [tickLower, setTickLower] = useState(-1000);
   const [tickSpacing, setTickSpacing] = useState(60);
   const [baseTokenSymbol, setBaseTokenSymbol] = useState("WETH");
@@ -56,7 +75,75 @@ export default function Home() {
     isRare,
   };
 
-  console.log(generateSVG(NFTData));
+  /**
+   * Selects random item from array based on array length
+   * @param {type[]} array containing items
+   * @returns arrayItem
+   */
+  const selectRandomItemFromArray = (array) => {
+    return array[Math.floor(Math.random() * array.length)];
+  };
+
+  // Tick spacing calculations from Uniswap test suite
+  const getMinTick = (tickSpacing) =>
+    Math.ceil(-887272 / tickSpacing) * tickSpacing;
+  const getMaxTick = (tickSpacing) =>
+    Math.floor(887272 / tickSpacing) * tickSpacing;
+
+  /**
+   * Randomizes all NFT parameters based on their type
+   */
+  const randomizeNFT = () => {
+    // Background positions
+    for (const positionSetter of [setX1, setX2, setX3, setY1, setY2, setY3]) {
+      // Select random position between 0 -> 501
+      positionSetter(Math.floor(Math.random() * 501));
+    }
+
+    // Colors
+    for (const colorSetter of [setColor0, setColor1, setColor2, setColor3]) {
+      // Generate random hex colors
+      colorSetter(Math.floor(Math.random() * 16777215).toString(16));
+    }
+
+    // Rarity chance based on tokenId (this is not accurate to spec but close)
+    const tokenId = Math.floor(Math.random() * 100001);
+    setTokenId(tokenId);
+    setIsRare(
+      // If tokenId is under 100
+      tokenId <= 100
+        ? // Apply 10% chance of getting a rare LP position
+          Math.random() < 0.1
+          ? true
+          : false
+        : // Else, apply a 0.03% chance
+        Math.random() < 0.03
+        ? true
+        : false
+    );
+
+    // Fee tier
+    setFeeTier(selectRandomItemFromArray([0.05, 0.1, 0.3]));
+
+    // Ticks
+    const tickSpacing = selectRandomItemFromArray([10, 60, 200]);
+    setTickSpacing(tickSpacing);
+    setTickUpper(Math.floor(Math.random() * getMaxTick(tickSpacing)) / 10);
+    setTickLower(
+      (Math.floor(Math.random() * getMinTick(tickSpacing)) * -1) / 10
+    );
+
+    // Tokens
+    const token0 = selectRandomItemFromArray(TOKENS);
+    const token0OmittedTokens = TOKENS.filter(
+      (token) => token.address != token0.address
+    );
+    const token1 = selectRandomItemFromArray(token0OmittedTokens);
+    setBaseTokenSymbol(token0.name);
+    setBaseToken(token0.address);
+    setQuoteTokenSymbol(token1.name);
+    setBaseToken(token1.address);
+  };
 
   return (
     <Layout>
@@ -67,6 +154,10 @@ export default function Home() {
         // Inject SVG to render
         dangerouslySetInnerHTML={{ __html: generateSVG(NFTData) }}
       />
+
+      <div className={styles.home__random}>
+        <button onClick={randomizeNFT}>Randomize</button>
+      </div>
 
       {/* Generated SVG options */}
       <div className={styles.home__options}>

@@ -3,6 +3,28 @@
   font-family: "Courier New", monospace !important;
 }
 
+// Randomization container
+.home__random {
+  margin-top: 20px;
+
+  button {
+    background-color: rgb(33, 114, 229);
+    color: #fff;
+    width: 100%;
+    border: none;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 10px 0px;
+    margin: 10px 0px;
+    cursor: pointer;
+    width: 150px;
+  }
+
+  button:hover {
+    opacity: 0.8;
+  }
+}
+
 // Options table
 .home__options {
   background-color: rgb(25, 27, 31);
@@ -11,7 +33,7 @@
   box-shadow: rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px,
     rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px;
   border-radius: 24px;
-  margin: 50px auto;
+  margin: 30px auto 50px auto;
   border: 1px solid rgb(77, 83, 95);
   text-align: left;
   padding: 25px 25px;
