@@ -14,11 +14,11 @@
   margin: 50px auto;
   border: 1px solid rgb(77, 83, 95);
   text-align: left;
-  padding: 10px 25px;
+  padding: 25px 25px;
   color: white;
 
   h3:first-of-type {
-    margin-block-start: 15px;
+    margin-block-start: 0px;
   }
 
   h3 {
@@ -30,5 +30,41 @@
     margin-block-start: 5px;
     margin-block-end: 15px;
     color: rgb(161, 169, 184);
+  }
+
+  > div {
+    h4 {
+      margin-block-start: 10px;
+      margin-block-end: 10px;
+      color: rgb(131, 138, 151);
+    }
+
+    input {
+      background-color: rgb(33, 36, 41);
+      border: 1px solid rgb(44, 47, 54);
+      border-radius: 5px;
+      width: calc(100% - 20px);
+      display: block;
+      color: #fff;
+      font-size: 18px;
+      padding: 10px 10px;
+      margin: 5px 0px;
+    }
+
+    button {
+      background-color: rgb(33, 114, 229);
+      color: #fff;
+      width: 100%;
+      border: none;
+      font-size: 18px;
+      border-radius: 5px;
+      padding: 10px 0px;
+      margin: 10px 0px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
   }
 }

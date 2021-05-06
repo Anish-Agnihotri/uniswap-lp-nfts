@@ -3,18 +3,6 @@ import Layout from "components/Layout"; // Layout wrapper
 import generateSVG from "utils/NFTSVG"; // SVG rendering utils
 import styles from "styles/Home.module.scss"; // Page styles
 
-/*const getMinTick = (tickSpacing) =>
-	Math.ceil(-887272 / tickSpacing) * tickSpacing;
-const getMaxTick = (tickSpacing) =>
-	Math.floor(887272 / tickSpacing) * tickSpacing;*/
-
-/*
-TODO:
-1. Selectors
-2. Meta
-4. Mobile responsive
-6. Download
-*/
 export default function Home() {
 	// State management (should refactor to object)
 	const [x1, setX1] = useState(192);
@@ -80,11 +68,51 @@ export default function Home() {
 			<div className={styles.home__options}>
 				<h3>Colors</h3>
 				<p>Configure colors and color positions.</p>
-				<div></div>
+				<div>
+					<h4>Colors</h4>
+					{[
+						{ name: "Color 0", value: color0, setter: setColor0 },
+						{ name: "Color 1", value: color1, setter: setColor1 },
+						{ name: "Color 2", value: color2, setter: setColor2 },
+						{ name: "Color 3", value: color3, setter: setColor3 },
+					].map((fields, i) => {
+						return (
+							<input
+								key={i}
+								type="text"
+								value={fields.value}
+								onChange={(e) => fields.setter(e.target.value)}
+								placeholder={fields.name}
+							/>
+						);
+					})}
+					<h4>X/Y Background Positions</h4>
+					{[
+						{ name: "X1 Position", value: x1, setter: setX1 },
+						{ name: "Y1 Position", value: y1, setter: setY1 },
+						{ name: "X2 Position", value: x2, setter: setX2 },
+						{ name: "Y2 Position", value: y2, setter: setY2 },
+						{ name: "X3 Position", value: x3, setter: setX3 },
+						{ name: "Y3 Position", value: y3, setter: setY3 },
+					].map((fields, i) => {
+						return (
+							<input
+								key={i}
+								type="number"
+								value={fields.value}
+								onChange={(e) => fields.setter(e.target.value)}
+								placeholder={fields.name}
+							/>
+						);
+					})}
+				</div>
 
-				<h3>Rarity (isRare, tokenId)</h3>
+				<h3>Rarity</h3>
 				<p>Configure rarity and token ID.</p>
 				<div>
+					<button onClick={() => setIsRare((previous) => !previous)}>
+						Toggle Rare
+					</button>
 					<input
 						type="number"
 						value={tokenId}
@@ -96,32 +124,67 @@ export default function Home() {
 				<h3>General</h3>
 				<p>Configure pair and curve details.</p>
 				<div>
-					<input
-						type="text"
-						placeholder="Base Token Symbol (WETH)"
-						value={baseTokenSymbol}
-						onChange={(e) => setBaseTokenSymbol(e.target.value)}
-					/>
-					<input
-						type="text"
-						placeholder="Quote Token Symbol (UNI)"
-						value={quoteTokenSymbol}
-						onChange={(e) => setQuoteToken(e.target.value)}
-					/>
-					<input
-						type="text"
-						placeholder="Base Token Address"
-						value={baseToken}
-						onChange={(e) => setBaseToken(e.target.value)}
-					/>
-					<input
-						type="text"
-						placeholder="Quote Token Address"
-						value={quoteToken}
-						onChange={(e) => setQuoteToken(e.target.value)}
-					/>
+					{[
+						{
+							name: "Base Token Symbol (WETH)",
+							value: baseTokenSymbol,
+							setter: setBaseTokenSymbol,
+							number: false,
+						},
+						{
+							name: "Quote Token Symbol (UNI)",
+							value: quoteTokenSymbol,
+							setter: setQuoteTokenSymbol,
+							number: false,
+						},
+						{
+							name: "Base Token Address",
+							value: baseToken,
+							setter: setBaseToken,
+							number: false,
+						},
+						{
+							name: "Quote Token Address",
+							value: quoteToken,
+							setter: setQuoteToken,
+							number: false,
+						},
+						{
+							name: "Upper Tick",
+							value: tickUpper,
+							setter: setTickUpper,
+							number: true,
+						},
+						{
+							name: "Lower Tick",
+							value: tickLower,
+							setter: setTickLower,
+							number: true,
+						},
+						{
+							name: "Tick Spacing",
+							value: tickSpacing,
+							setter: setTickSpacing,
+							number: true,
+						},
+						{
+							name: "Fee Tier",
+							value: feeTier,
+							setter: setFeeTier,
+							number: true,
+						},
+					].map((fields, i) => {
+						return (
+							<input
+								key={i}
+								type={fields.number ? "number" : "text"}
+								value={fields.value}
+								onChange={(e) => fields.setter(e.target.value)}
+								placeholder={fields.name}
+							/>
+						);
+					})}
 				</div>
-				<p>tickUpper, tickLower, tickSpacing, quoteToken, baseToken, feeTier</p>
 			</div>
 		</Layout>
 	);
