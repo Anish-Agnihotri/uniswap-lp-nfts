@@ -33,8 +33,24 @@
   }
 
   > div {
+    .home__options_colors {
+      background-color: rgb(33, 36, 41);
+      border: 1px solid rgb(44, 47, 54);
+      border-radius: 5px;
+      width: calc(100% - 20px);
+      display: block;
+      color: #fff;
+      font-size: 18px;
+      padding: 10px 10px;
+      margin: 5px 0px;
+
+      > div {
+        width: 100% !important;
+      }
+    }
+
     h4 {
-      margin-block-start: 10px;
+      margin-block-start: 20px;
       margin-block-end: 10px;
       color: rgb(131, 138, 151);
     }
