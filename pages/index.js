@@ -128,9 +128,9 @@ export default function Home() {
     // Ticks
     const tickSpacing = selectRandomItemFromArray([10, 60, 200]);
     setTickSpacing(tickSpacing);
-    setTickUpper(Math.floor(Math.random() * getMaxTick(tickSpacing)) / 10);
+    setTickUpper(Math.floor((Math.random() * getMaxTick(tickSpacing)) / 10));
     setTickLower(
-      (Math.floor(Math.random() * getMinTick(tickSpacing)) * -1) / 10
+      Math.floor((Math.random() * getMinTick(tickSpacing) * -1) / 10)
     );
 
     // Tokens
